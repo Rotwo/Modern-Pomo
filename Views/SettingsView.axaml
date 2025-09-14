@@ -1,0 +1,27 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="325"
+             x:Class="modern_pomo.Views.SettingsView"
+             xmlns:vm="using:modern_pomo.ViewModels"
+             x:DataType="vm:SettingsViewModel"
+             Background="{DynamicResource RegionBrush}"
+             Foreground="{DynamicResource ForegroundBrush}"
+             >
+    <StackPanel Margin="20" Spacing="16">
+        <TextBlock FontSize="20" FontWeight="SemiBold">Settings</TextBlock>
+        
+        <StackPanel Spacing="4">
+            <Label>Focus Time (Minutes)</Label>
+            <NumericUpDown Value="{Binding FocusModeDuration, Mode=TwoWay}" FormatString="0" Minimum="0" Maximum="60"></NumericUpDown>
+            <Label>Break Time (Minutes)</Label>
+            <NumericUpDown Value="{Binding BreakModeDuration, Mode=TwoWay}" FormatString="0" Minimum="0" Maximum="60"></NumericUpDown>
+            <Label>Pomodoro Cycles</Label>
+            <NumericUpDown Value="{Binding PomodoroCyclesDecimal, Mode=TwoWay}" FormatString="0" Minimum="0" Maximum="60"></NumericUpDown>
+            <Button Command="{Binding SaveConfigCommand}" CommandParameter="{Binding $parent[Window]}" Margin="0 8 0 0">
+                <Label><![CDATA[Save & Update]]></Label>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

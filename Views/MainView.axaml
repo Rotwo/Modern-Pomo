@@ -1,0 +1,41 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:modern_pomo.ViewModels"
+             x:DataType="vm:MainViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="modern_pomo.Views.MainView"
+             Background="{DynamicResource RegionBrush}"
+             Foreground="{DynamicResource ForegroundBrush}"
+             >
+        <Grid RowDefinitions="*, Auto" Margin="20">
+            <Grid VerticalAlignment="Stretch">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="8">
+                    <TextBlock Text="{Binding RemainingTimeDisplay}" VerticalAlignment="Center" FontSize="48" FontWeight="Bold"></TextBlock>
+                    <StackPanel Spacing="8" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Command="{Binding AddFocusTimeCommand}">
+                            <Label>➕</Label>
+                        </Button>
+                        <Button Command="{Binding RemoveFocusTimeCommand}">
+                            <Label>➖</Label>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Spacing="4">
+                <Button IsVisible="{Binding CanStartPomodoro}" Command="{Binding StartPomodoroTimerCommand}" Padding="24 4">
+                    <Label>Start</Label>
+                </Button>
+                <Button IsVisible="{Binding CanStopPomodoro}" Command="{Binding StopPomodoroTimerCommand}" Padding="24 4">
+                    <Label>Stop</Label>
+                </Button>
+                <Button Command="{Binding RestartPomodoroTimerCommand}" Padding="24 4">
+                    <Label>Restart</Label>
+                </Button>
+                <Button Command="{Binding OpenSettingsWindowCommand}" Padding="3">
+                    <Label>⚙️</Label>
+                </Button>
+            </StackPanel>
+        </Grid>
+</UserControl>
