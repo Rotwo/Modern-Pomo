@@ -1,0 +1,64 @@
+name: Build Modern-Pomo for Windows & Linux
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-windows:
+    name: Build for Windows
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore ModernPomo.sln
+
+    - name: Build project
+      run: dotnet build ModernPomo.sln --configuration Release --no-restore
+
+    - name: Publish Windows x64
+      run: dotnet publish modern_pomo.csproj -c Release -r win-x64 --self-contained true -o ./publish/win-x64
+
+    - name: Upload Windows Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ModernPomo-win-x64
+        path: ./publish/win-x64
+
+  build-linux:
+    name: Build for Linux
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore ModernPomo.sln
+
+    - name: Build project
+      run: dotnet build ModernPomo.sln --configuration Release --no-restore
+
+    - name: Publish Linux x64
+      run: dotnet publish modern_pomo.csproj -c Release -r linux-x64 --self-contained true -o ./publish/linux-x64
+
+    - name: Upload Linux Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ModernPomo-linux-x64
+        path: ./publish/linux-x64
