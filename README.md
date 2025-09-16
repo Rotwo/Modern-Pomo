@@ -7,7 +7,7 @@ A simple, cross-platform Pomodoro timer built with C# and Avalonia UI. Designed 
 * Pomodoro workflow: work, short break, long break
 * Open-source and MIT licensed
 
-![](https://github.com/Rotwo/Modern-Pomo/blob/main/Assets/repo/screenshot.png)
+![](https://github.com/Rotwo/Modern-Pomo/blob/main/Assets/repo/screenshot-redesign.png)
 
 ## 🚀 Getting Started
 ```bash
