@@ -24,6 +24,9 @@ public partial class MainViewModel : ViewModelBase
     
     public bool CanStartPomodoro => !IsPomodoroSessionRunning;
     public bool CanStopPomodoro => IsPomodoroSessionRunning;
+
+    public State FocusModeState => State.Focus;
+    public State BreakModeState => State.Break;
     
     public MainViewModel(IPomodoroTimerService pomodoroTimerService)
     {
@@ -85,5 +88,11 @@ public partial class MainViewModel : ViewModelBase
             };
             settingsWindow.Show();
         });
+    }
+
+    [RelayCommand]
+    private void SetCurrentState(State state)
+    {
+        _pomodoroTimerService.SetCurrentState(state);
     }
 }
