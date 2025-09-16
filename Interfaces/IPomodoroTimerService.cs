@@ -22,6 +22,8 @@ public interface IPomodoroTimerService
     void SetFocusTime(TimeSpan time);
     void SetBreakTime(TimeSpan time);
     void SetCycles(int cycles);
+    
+    void SetCurrentState(State state);
 
     event EventHandler<TimerEventArgs> OnTimerDown;
     event EventHandler<PomodoroSessionChangeArgs> OnPomodoroSessionChange;

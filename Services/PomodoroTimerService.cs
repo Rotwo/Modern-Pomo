@@ -40,7 +40,7 @@ public class PomodoroTimerService : IPomodoroTimerService
     private State _state;
     
     private TimeSpan _remainingTime;
-
+    
     public event EventHandler<TimerEventArgs> OnTimerDown = delegate { };
     public event EventHandler<PomodoroSessionChangeArgs> OnPomodoroSessionChange = delegate { };
     
@@ -110,8 +110,7 @@ public class PomodoroTimerService : IPomodoroTimerService
     public void AddFocusTime(TimeSpan time)
     {
         if(!_sessionModel.IsRunning) {
-            _sessionModel.FocusDuration += time;
-            OnTimerDown.Invoke(this, new TimerEventArgs(_sessionModel.FocusDuration));
+            AddCurrentStateTime(time);
         }
         else
         {
@@ -124,8 +123,7 @@ public class PomodoroTimerService : IPomodoroTimerService
     {
         if (!_sessionModel.IsRunning)
         {
-            _sessionModel.FocusDuration -= time;
-            OnTimerDown.Invoke(this, new TimerEventArgs(_sessionModel.FocusDuration));
+            RemoveCurrentStateTime(time);
         }
         else
         {
@@ -134,6 +132,57 @@ public class PomodoroTimerService : IPomodoroTimerService
         }
     }
 
+    private void AddCurrentStateTime(TimeSpan time)
+    {
+        switch (_state)
+        {
+            case State.Focus:
+                _sessionModel.FocusDuration += time;
+                break;
+            case State.Break:
+                _sessionModel.BreakDuration += time;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
+        SendTimerDownEvent();
+    }
+    
+    private void RemoveCurrentStateTime(TimeSpan time)
+    {
+        switch (_state)
+        {
+            case State.Focus:
+                _sessionModel.FocusDuration -= time;
+                OnTimerDown.Invoke(this, new TimerEventArgs(_sessionModel.FocusDuration));
+                break;
+            case State.Break:
+                _sessionModel.BreakDuration -= time;
+                OnTimerDown.Invoke(this, new TimerEventArgs(_sessionModel.BreakDuration));
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
+        SendTimerDownEvent();
+    }
+
+    private void SendTimerDownEvent()
+    {
+        switch (_state)
+        {
+            case State.Focus:
+                OnTimerDown.Invoke(this, new TimerEventArgs(_sessionModel.FocusDuration));
+                break;
+            case State.Break:
+                OnTimerDown.Invoke(this, new TimerEventArgs(_sessionModel.BreakDuration));
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+    
     public void SetFocusTime(TimeSpan time)
     {
         _sessionModel.FocusDuration = time;
@@ -150,7 +199,13 @@ public class PomodoroTimerService : IPomodoroTimerService
     {
         _sessionModel.MaxCycles = cycles;
     }
-
+    
+    public void SetCurrentState(State state)
+    {
+        _state = state;
+        SendTimerDownEvent();
+    }
+    
     private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
     {
         _remainingTime -= TimeSpan.FromSeconds(1);

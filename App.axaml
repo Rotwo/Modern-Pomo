@@ -11,6 +11,7 @@
   
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="/Styles/AppDefaultStyles.axaml"></StyleInclude>
     </Application.Styles>
              
     <Application.Resources>
@@ -18,21 +19,26 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
                     <!-- Light theme -->
-                    <SolidColorBrush x:Key="AccentBrush" Color="#4CAF50"/>
-                    <SolidColorBrush x:Key="RegionBrush" Color="#FAFAFA"/>
-                    <SolidColorBrush x:Key="ForegroundBrush" Color="#212121"/>
-                    <SolidColorBrush x:Key="ErrorBrush" Color="#D32F2F"/>
-                    <SolidColorBrush x:Key="SuccessBrush" Color="#388E3C"/>
+
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <!-- Dark Theme Brushes -->
-                    <SolidColorBrush x:Key="AccentBrush" Color="#81C784"/>
-                    <SolidColorBrush x:Key="RegionBrush" Color="#121212"/>
-                    <SolidColorBrush x:Key="ForegroundBrush" Color="#E0E0E0"/>
-                    <SolidColorBrush x:Key="ErrorBrush" Color="#EF5350"/>
-                    <SolidColorBrush x:Key="SuccessBrush" Color="#66BB6A"/>
+                    <SolidColorBrush x:Key="Background" Color="#1F1F1F"/>
+                    <SolidColorBrush x:Key="Card" Color="#414141"/>
+                    <SolidColorBrush x:Key="Primary" Color="#CE2F15"/>
+                    <SolidColorBrush x:Key="Secondary" Color="#5A5A5A"/>
+                    <SolidColorBrush x:Key="Foreground" Color="#F3F4F4"/>
+
+                    <SolidColorBrush x:Key="Tooltip/Background/Active" Color="#4D4D4D"/>
+                    <SolidColorBrush x:Key="Tooltip/Foreground/Active" Color="#AFAFAF"/>
+                    <SolidColorBrush x:Key="Tooltip/Background/Inactive" Color="#313131"/>
+                    <SolidColorBrush x:Key="Tooltip/Foreground/Inactive" Color="#8C8A8A"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
+        
+        <!-- Fonts -->
+        <FontFamily x:Key="PhosphorFill">/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
+        <FontFamily x:Key="Phosphor">/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
     </Application.Resources>
 </Application>

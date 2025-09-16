@@ -4,37 +4,55 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:modern_pomo.ViewModels"
              x:DataType="vm:MainViewModel"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              x:Class="modern_pomo.Views.MainView"
-             Background="{DynamicResource RegionBrush}"
-             Foreground="{DynamicResource ForegroundBrush}"
+             Background="{DynamicResource Background}"
+             Foreground="{DynamicResource Foreground}"
              >
-        <Grid RowDefinitions="*, Auto" Margin="20">
-            <Grid VerticalAlignment="Stretch">
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="8">
-                    <TextBlock Text="{Binding RemainingTimeDisplay}" VerticalAlignment="Center" FontSize="48" FontWeight="Bold"></TextBlock>
-                    <StackPanel Spacing="8" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Command="{Binding AddFocusTimeCommand}">
-                            <Label>➕</Label>
+        <Grid Margin="20" RowDefinitions="24, *, Auto">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Orientation="Horizontal" Spacing="4">
+                <Image Source="/Assets/Images/tomato-icon-4x.png" Width="24" Height="24" VerticalAlignment="Center"></Image>
+                <TextBlock VerticalAlignment="Center" FontSize="19" FontWeight="Medium">Modern Pomo</TextBlock>
+            </StackPanel>
+            <Panel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Spacing="10">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="6">
+                        <Button Command="{Binding SetCurrentStateCommand}" CommandParameter="{Binding FocusModeState}" Background="{DynamicResource Tooltip/Background/Active}" Padding="8 2" CornerRadius="999">
+                            <Label>focus</Label>
                         </Button>
-                        <Button Command="{Binding RemoveFocusTimeCommand}">
-                            <Label>➖</Label>
+                        <Button Command="{Binding SetCurrentStateCommand}" CommandParameter="{Binding BreakModeState}" Background="{DynamicResource Tooltip/Background/Inactive}" Padding="8 2" CornerRadius="999">
+                            <Label>short break</Label>
+                        </Button>
+                    </StackPanel>
+                    <Label HorizontalAlignment="Center" Content="{Binding RemainingTimeDisplay}" FontSize="60" FontWeight="Bold"></Label>
+                    <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                        <Button Command="{Binding AddFocusTimeCommand}" Classes="Base secondary circular" Foreground="{DynamicResource Foreground}">
+                            <Label FontWeight="Medium" Classes="icon" FontSize="24">&#xE3D4;</Label>
+                        </Button>
+                        <Button Command="{Binding RemoveFocusTimeCommand}" Classes="Base secondary circular" Foreground="{DynamicResource Foreground}">
+                            <Label FontWeight="Medium" Classes="icon" FontSize="24">&#xE32A;</Label>
                         </Button>
                     </StackPanel>
                 </StackPanel>
-            </Grid>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Spacing="4">
-                <Button IsVisible="{Binding CanStartPomodoro}" Command="{Binding StartPomodoroTimerCommand}" Padding="24 4">
-                    <Label>Start</Label>
+            </Panel>
+            <StackPanel Grid.Row="2" Spacing="8" HorizontalAlignment="Center">
+                <Button Command="{Binding StartPomodoroTimerCommand}" IsVisible="{Binding CanStartPomodoro}" HorizontalContentAlignment="Center" Classes="Base primary" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" Spacing="2">
+                        <Label VerticalAlignment="Center" Classes="icon_fill">&#xE3D0;</Label>
+                        <Label VerticalAlignment="Center">Start Timer</Label>
+                    </StackPanel>
                 </Button>
-                <Button IsVisible="{Binding CanStopPomodoro}" Command="{Binding StopPomodoroTimerCommand}" Padding="24 4">
-                    <Label>Stop</Label>
+                <Button Command="{Binding StopPomodoroTimerCommand}" IsVisible="{Binding CanStopPomodoro}" HorizontalContentAlignment="Center" Classes="Base primary" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" Spacing="2">
+                        <Label VerticalAlignment="Center" Classes="icon_fill">&#xE39E;</Label>
+                        <Label VerticalAlignment="Center">Pause Timer</Label>
+                    </StackPanel>
                 </Button>
-                <Button Command="{Binding RestartPomodoroTimerCommand}" Padding="24 4">
-                    <Label>Restart</Label>
-                </Button>
-                <Button Command="{Binding OpenSettingsWindowCommand}" Padding="3">
-                    <Label>⚙️</Label>
+                <Button Padding="32 8" Command="{Binding RestartPomodoroTimerCommand}" HorizontalContentAlignment="Center" Classes="Base secondary" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" Spacing="2">
+                        <Label VerticalAlignment="Center" Classes="icon_fill">&#xE036;</Label>
+                        <Label VerticalAlignment="Center">Reset Timer</Label>
+                    </StackPanel>
                 </Button>
             </StackPanel>
         </Grid>
