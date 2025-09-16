@@ -25,7 +25,7 @@
                     <SolidColorBrush x:Key="Secondary" Color="#F5F5F5"/>
                     <SolidColorBrush x:Key="Foreground" Color="#2C2C2C"/>
 
-                    <SolidColorBrush x:Key="Tooltip/Background/Active" Color="#D4D4D4"/>
+                    <SolidColorBrush x:Key="Tooltip/Background/Active" Color="#CFCDCD"/>
                     <SolidColorBrush x:Key="Tooltip/Foreground/Active" Color="#606060"/>
                     <SolidColorBrush x:Key="Tooltip/Background/Inactive" Color="#E2E2E2"/>
                     <SolidColorBrush x:Key="Tooltip/Foreground/Inactive" Color="#6C6B6B"/>
